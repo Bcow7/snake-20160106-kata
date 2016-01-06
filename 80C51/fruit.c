@@ -13,7 +13,18 @@
  * le paramètre est mis à jour avec la position effective du fruit.
  */
 void FRUIT_placeInFreeSpace(Position *position) {
-	// À faire
+	
+   char c;
+   c = T6963C_readFrom(position->x, position->y);
+   
+   while (c != EMPTY)
+   {
+      position->x--;
+      
+      c = T6963C_readFrom(position->x, position->y);
+   }
+
+   T6963C_writeAt(position->x, position->y, FRUIT);	
 }
 
 /**
@@ -56,7 +67,7 @@ int testFruitIsPlacedInFreeSpace() {
 	FRUIT_placeInFreeSpace(&position);
 	testsInError += assertNotEquals(position.x, 10, "FPF4");
 	c = T6963C_readFrom(position.x, position.y);
-	testsInError += assertEquals(c, FRUIT, "FPF6");
+	testsInError += assertEquals(c, FRUIT, "FPF5");
 
 	return testsInError;
 }
