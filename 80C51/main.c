@@ -32,7 +32,7 @@ void play() {
 		arrow = KEYBOARD_readArrows(keyboard);
 		if (SNAKE_iterate(&snake, arrow) == EATING) {
 			FRUIT_place();
-		}		
+		}
 		pause(20000);
 	} while (snake.status != DEAD);
 
@@ -42,6 +42,7 @@ void play() {
 void main(void) {
 
 	initialize();
+
 	play();
 
 	while(1);
