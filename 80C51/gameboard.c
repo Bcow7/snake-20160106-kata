@@ -47,7 +47,11 @@ void GMB_initialize() {
  * @param x1, y1: Coordonnées de l'angle inférieur gauche.
  */
 void GMB_draw(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1) {
-	// À faire
+
+   T6963C_writeAt(x0, y0, OBSTACLE_A);
+   T6963C_writeAt(x1, y0, OBSTACLE_C);
+   T6963C_writeAt(x0, y1, OBSTACLE_F);
+   T6963C_writeAt(x1, y1, OBSTACLE_H);
 }
 
 /**
@@ -57,7 +61,13 @@ void GMB_draw(unsigned char x0, unsigned char y0, unsigned char x1, unsigned cha
  * @param x1, y1: Coordonnées de l'angle inférieur gauche.
  */
 void GMB_clear(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1) {
-	// À faire
+	
+   unsigned char x,y;
+   for (x = x0; x <= x1; x++) {
+      for (y = y0; y <= y1; y++) {
+	 T6963C_writeAt(x, y, EMPTY);
+      }
+   } 
 }
 
 /**
