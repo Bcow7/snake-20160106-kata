@@ -34,7 +34,20 @@ void SNAKE_move(Snake *snake) {
  * @param snake La description du serpent.
  */
 void SNAKE_liveOrDie(Snake *snake) {
-	// À faire
+   
+   switch(T6963C_readFrom(snake->position.x, snake->position.y)){
+      case FRUIT:
+	 snake->status = EATING;
+	 // On met à jour les calories
+	 snake->caloriesLeft = FRUIT_CALORIES;
+	 break;
+      case EMPTY:
+	 snake->status = ALIVE;
+	 break;
+      default:
+	 snake->status = DEAD;
+	 break;
+   }
 }
 
 /**
