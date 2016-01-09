@@ -42,7 +42,8 @@ void SNAKE_liveOrDie(Snake *snake) {
  * @param snake La définition du serpent.
  */
 void SNAKE_showHead(Snake *snake) {
-	// À faire
+	
+   T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_HEAD);
 }
 
 /**
@@ -51,7 +52,24 @@ void SNAKE_showHead(Snake *snake) {
  * @param snake La définition du serpent.
  */
 void SNAKE_showBody(Snake *snake) {
-	// À faire
+	
+   if (snake->status == EATING)
+   {
+      T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_SWALLOW);
+   } else {
+      T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_BODY);
+   }
+   
+   BUFFER_in(snake->position.x);
+   BUFFER_in(snake->position.y);
+   
+   if (snake->caloriesLeft > 0)
+   {
+      snake->caloriesLeft--;
+   } else {
+      T6963C_writeAt(BUFFER_out(), BUFFER_out(), EMPTY);
+   }
+   
 }
 
 /**
@@ -60,8 +78,24 @@ void SNAKE_showBody(Snake *snake) {
  * @param snake La description du serpent.
  * @param arrow La direction désirée.
  */
-void SNAKE_turn(Snake *snake, Arrow arrow) {
-	// À faire
+void SNAKE_turn(Snake *snake, Arrow arrow) 
+{   
+   if (arrow == ARROW_UP && snake->direction != MOVES_DOWN)
+   {
+       snake->direction = MOVES_UP;
+   } 
+   else if (arrow == ARROW_LEFT && snake->direction != MOVES_RIGHT)
+   {
+       snake->direction = MOVES_LEFT;
+   } 
+   else if (arrow == ARROW_RIGHT && snake->direction != MOVES_LEFT)
+   {
+       snake->direction = MOVES_RIGHT;
+   } 
+   else if (arrow == ARROW_DOWN && snake->direction != MOVES_UP)
+   {
+       snake->direction = MOVES_DOWN;
+   }
 }
 
 /**
