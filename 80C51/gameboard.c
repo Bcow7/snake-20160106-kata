@@ -48,10 +48,21 @@ void GMB_initialize() {
  */
 void GMB_draw(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1) {
 
+   unsigned char i;
+   
    T6963C_writeAt(x0, y0, OBSTACLE_A);
    T6963C_writeAt(x1, y0, OBSTACLE_C);
    T6963C_writeAt(x0, y1, OBSTACLE_F);
    T6963C_writeAt(x1, y1, OBSTACLE_H);
+   
+   for (i = x0+1; i <= x1-1; i++) {
+      T6963C_writeAt(i, y0, OBSTACLE_B);
+      T6963C_writeAt(i, y1, OBSTACLE_G);
+   }
+   for (i = y0+1; i <= y1-1; i++) {
+      T6963C_writeAt(x0, i, OBSTACLE_D);
+      T6963C_writeAt(x1, i, OBSTACLE_E);
+   }
 }
 
 /**
