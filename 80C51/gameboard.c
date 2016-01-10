@@ -89,7 +89,16 @@ void GMB_clear(unsigned char x0, unsigned char y0, unsigned char x1, unsigned ch
  * @param text Le texte à afficher.
  */
 void GMB_display(unsigned char x0, unsigned char y0, char *text) {
-	// À faire
+
+   unsigned int address;
+   unsigned char i;
+   
+   GMB_draw(x0, y0, x0 + strlen(text) + 1, y0 + 2);
+
+   for(i = 0; i<strlen(text); i++)
+   {
+      T6963C_writeAt(x0+1+i, y0+1, text[i]-0x20);
+   }
 }
 
 #ifdef TEST
