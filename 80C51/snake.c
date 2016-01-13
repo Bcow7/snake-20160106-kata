@@ -45,6 +45,7 @@ void SNAKE_liveOrDie(Snake *snake) {
 	 snake->caloriesLeft = FRUIT_CALORIES;
 	 break;
       case EMPTY:
+	 case '.':
 	 snake->status = ALIVE;
 	 break;
       default:
@@ -67,8 +68,13 @@ void SNAKE_liveOrDie(Snake *snake) {
  * @param snake La définition du serpent.
  */
 void SNAKE_showHead(Snake *snake) {
-	
-   T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_HEAD);
+   
+   if (snake->status == DEAD)
+   {
+      T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_DEAD);
+   } else {
+      T6963C_writeAt(snake->position.x, snake->position.y, SNAKE_HEAD);
+   }
 }
 
 /**
