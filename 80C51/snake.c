@@ -35,7 +35,10 @@ void SNAKE_move(Snake *snake) {
  */
 void SNAKE_liveOrDie(Snake *snake) {
    
-   switch(T6963C_readFrom(snake->position.x, snake->position.y)){
+   unsigned char c;
+   c = T6963C_readFrom(snake->position.x, snake->position.y);
+   
+   switch(c){
       case FRUIT:
 	 snake->status = EATING;
 	 // On met à jour les calories
@@ -47,6 +50,15 @@ void SNAKE_liveOrDie(Snake *snake) {
       default:
 	 snake->status = DEAD;
 	 break;
+   }
+   
+   // On vérifie  que la tête est dans l'espace de jeu
+   if(snake->position.x <= SNAKE_LIMIT_X0 ||
+      snake->position.x >= SNAKE_LIMIT_X1 ||
+      snake->position.y <= SNAKE_LIMIT_Y0 ||
+      snake->position.y >= SNAKE_LIMIT_Y1)
+   {
+      snake->status = DEAD;
    }
 }
 
